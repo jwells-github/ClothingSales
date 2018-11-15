@@ -12,9 +12,11 @@ package clothingsales;
 public class SaleProduct {
     
    private String title;
-   private String imageSrc;
-   private String OriginalPrice;
-   private String SalePrice;
+   private String imageSrc ="";
+   private String originalPrice;
+   private String salePrice;
+   private String productLink;
+   private String shopName;
 
     public String getTitle() {
         return title;
@@ -33,20 +35,38 @@ public class SaleProduct {
     }
 
     public String getOriginalPrice() {
-        return OriginalPrice;
+        return originalPrice;
     }
 
+    public String getProductLink() {
+        return productLink;
+    }
+    
+
     public void setOriginalPrice(String OriginalPrice) {
-        this.OriginalPrice = OriginalPrice;
+        this.originalPrice = OriginalPrice;
     }
 
     public String getSalePrice() {
-        return SalePrice;
+        return salePrice;
     }
 
     public void setSalePrice(String SalePrice) {
-        this.SalePrice = SalePrice;
+        this.salePrice = SalePrice;
+    }
+
+    public void setProductLink(String productLink) {
+        this.productLink = productLink;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
    
+    
     
 }

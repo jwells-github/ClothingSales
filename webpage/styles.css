@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.old-price{
+  text-decoration: line-through;
+}
+.sale-price{
+  color: red;
+}
+.shop-name{
+  position:absolute;
+  text-color:black;
+  font-size: 25px;
+}
+.item{
+  margin: 20px 10px;
+  border: 1px solid black;
+  width: 400px;
+}
+
+img{
+  width: 398px;
+  border: 1px solid black;
+}
+span{
+  display: block;
+  text-align: left;
+  margin: 5px;
+  
+}

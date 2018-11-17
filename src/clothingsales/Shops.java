@@ -45,8 +45,12 @@ public class Shops {
         public static final String WEEKDAY = "Weekday";
     }
     
+    private String MENS = "mens";
+    private String WOMENS = "womens";
+   
     private String RootUrl;
-    private String Url;
+    private String MensUrl;
+    private String WomensUrl;
     private String ShopName;
     private String ItemSelector;
     private String ItemNameSelector;
@@ -54,10 +58,12 @@ public class Shops {
     private String ItemOriginalPriceSelector;
     private String ItemSalePriceSelector;
     private String ItemProductUrl;
+
     
-    private  ArrayList<SaleProduct> SearchWebsite(){
+    private  ArrayList<SaleProduct> SearchWebsite(String Url, String Gender){
         ArrayList<SaleProduct> saleProducts = new ArrayList<SaleProduct>(); 
         try {
+            
             Document webpage = Jsoup.connect(Url).get();
             Elements saleItems = webpage.select(ItemSelector);
             for (Element e : saleItems){
@@ -70,6 +76,7 @@ public class Shops {
                 saleProduct.setProductLink(RootUrl + e.select(ItemProductUrl).attr("href"));
                 saleProduct.setOriginalPrice(e.select(ItemOriginalPriceSelector).text());
                 saleProduct.setSalePrice(e.select(ItemSalePriceSelector).text());
+                saleProduct.setGender(Gender);
                 saleProducts.add(saleProduct);
             }
         } catch (IOException ex) {
@@ -78,10 +85,15 @@ public class Shops {
         return saleProducts;
         
     }
+    
+
+    
    
     public ArrayList<SaleProduct> SearchUniqlo() {
+        ArrayList<SaleProduct> saleProducts = new ArrayList<SaleProduct>(); 
         RootUrl = "https://www.uniqlo.com";
-        Url = "https://www.uniqlo.com/uk/en/men/featured/sale";
+        MensUrl = "https://www.uniqlo.com/uk/en/men/featured/sale";
+        WomensUrl = "https://www.uniqlo.com/uk/en/women/featured/sale";
         ShopName = Names.UNIQLO;
         ItemSelector = "div.productTile__spacer";
         ItemNameSelector = "a.name-link.fontUniqloProRegular";
@@ -89,7 +101,9 @@ public class Shops {
         ItemOriginalPriceSelector = "span.product-standard-price";
         ItemSalePriceSelector = "span.product-sales-price";
         ItemProductUrl = "a.thumb-link";
-        return SearchWebsite();
+        saleProducts = SearchWebsite(MensUrl, MENS);
+        saleProducts.addAll(SearchWebsite(WomensUrl, WOMENS));
+        return saleProducts;
     }
     
     

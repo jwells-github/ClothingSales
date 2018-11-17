@@ -17,6 +17,7 @@ public class SaleProduct {
    private String salePrice;
    private String productLink;
    private String shopName;
+   private String gender;
 
     public String getTitle() {
         return title;
@@ -66,7 +67,16 @@ public class SaleProduct {
     public void setShopName(String shopName) {
         this.shopName = shopName;
     }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
    
+    
     
     
 }

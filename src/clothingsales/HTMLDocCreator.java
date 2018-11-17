@@ -33,7 +33,7 @@ public class HTMLDocCreator {
             bw.newLine();
             for(SaleProduct product : saleProducts){
                 bw.append("\t"
-                        + "<div class=\"item\">");
+                        + "<div class=\"item "+product.getGender()+"\">");
                 
                 bw.newLine();
                 bw.append("<span class=\"shop-name\">"+product.getShopName()+"</span>");

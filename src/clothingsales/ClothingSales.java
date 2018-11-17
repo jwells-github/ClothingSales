@@ -34,6 +34,7 @@ public class ClothingSales {
         Shops shops = new Shops();
         
         ArrayList<SaleProduct> sp = shops.SearchUniqlo();
+        sp.addAll(shops.SearchAsos());
         HTMLDocCreator htmlDocCreator = new HTMLDocCreator(sp);
         File file = new File("C:\\Users\\jaked\\Documents\\GitHub\\ClothingSales\\webpage\\sales.html");
         if(file.exists()){

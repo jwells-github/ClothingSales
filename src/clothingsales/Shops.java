@@ -58,14 +58,46 @@ public class Shops {
     private String ItemOriginalPriceSelector;
     private String ItemSalePriceSelector;
     private String ItemProductUrl;
+    private Boolean paging;
 
     
     private  ArrayList<SaleProduct> SearchWebsite(String Url, String Gender){
         ArrayList<SaleProduct> saleProducts = new ArrayList<SaleProduct>(); 
         try {
             
-            Document webpage = Jsoup.connect(Url).get();
-            Elements saleItems = webpage.select(ItemSelector);
+            int pageNumber = 1;
+            Document webpage;
+            Elements saleItems = new Elements();
+            if(paging){
+                while(true){
+                    try{
+                        webpage = Jsoup.connect(Url + pageNumber).get();
+                        Elements pageSaleItems = webpage.select(ItemSelector);
+                        if(pageSaleItems.size() > 0 && pageNumber < 10){
+                            saleItems.addAll(pageSaleItems);
+                            pageNumber++;
+                            System.out.println(pageSaleItems.size());
+                            System.out.println(pageNumber);
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    catch (IOException ex) {
+                        Logger.getLogger(Shops.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+
+                }                  
+            }
+            else{
+                webpage = Jsoup.connect(Url).get();
+                saleItems = webpage.select(ItemSelector);
+            }
+            
+           // Elements saleItems = webpage.select(ItemSelector);
+            
             for (Element e : saleItems){
                 SaleProduct saleProduct = new SaleProduct();
                 saleProduct.setShopName(ShopName);
@@ -101,11 +133,28 @@ public class Shops {
         ItemOriginalPriceSelector = "span.product-standard-price";
         ItemSalePriceSelector = "span.product-sales-price";
         ItemProductUrl = "a.thumb-link";
+        paging = false;
         saleProducts = SearchWebsite(MensUrl, MENS);
         saleProducts.addAll(SearchWebsite(WomensUrl, WOMENS));
         return saleProducts;
     }
     
-    
+        public ArrayList<SaleProduct> SearchAsos() {
+        ArrayList<SaleProduct> saleProducts = new ArrayList<SaleProduct>(); 
+        RootUrl = "";
+        MensUrl = "https://www.asos.com/men/outlet/cat/?cid=27396&nlid=mw|outlet|shop%20by%20product&page=";
+        WomensUrl = "https://www.asos.com/women/outlet/cat/?cid=27391&nlid=ww|outlet|shop%20by%20product&page=";
+        ShopName = Names.ASOS;
+        ItemSelector = "article._2oHs74P";
+        ItemNameSelector = "p";
+        ItemImageSelector = "img";
+        ItemOriginalPriceSelector = "span._342BXW_";
+        ItemSalePriceSelector = "span.JW3hTZk";
+        ItemProductUrl = "a._3x-5VWa";
+        paging = true;
+        saleProducts = SearchWebsite(MensUrl, MENS);
+        saleProducts.addAll(SearchWebsite(WomensUrl, WOMENS));
+        return saleProducts;
+    }
   
 }

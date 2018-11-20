@@ -29,6 +29,17 @@ public class HTMLDocCreator {
         try {
             bw = new BufferedWriter(new FileWriter(file, false));
             linkStyleSheet();
+            
+            bw.append("\t"
+                    + "<ul>");
+            bw.newLine();
+            bw.append("\t"
+                    + "<li><a>Mens</a></li>");
+            bw.newLine();
+            bw.append("\t"
+                    + "<li><a>Womens</a></li>");
+            bw.newLine();
+            bw.append("</ul>");
             bw.append("<div class=\"container\">");
             bw.newLine();
             for(SaleProduct product : saleProducts){

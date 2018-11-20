@@ -103,12 +103,25 @@ public class Shops {
                 saleProduct.setShopName(ShopName);
                 saleProduct.setTitle(e.select(ItemNameSelector).text());
                 if(e.select(ItemImageSelector) != null){
-                    saleProduct.setImageSrc(e.select(ItemImageSelector).first().absUrl("src").toString());
+                    try{
+                        saleProduct.setImageSrc(e.select(ItemImageSelector).first().absUrl("src").toString());
+                    }catch(Exception ex){
+                         saleProduct.setImageSrc("");
+                    }
+                    
+                }
+                if(saleProduct.getImageSrc().equals("")){
+                    saleProduct.setImageSrc("default.png");
                 }
                 saleProduct.setProductLink(RootUrl + e.select(ItemProductUrl).attr("href"));
                 saleProduct.setOriginalPrice(e.select(ItemOriginalPriceSelector).text());
                 saleProduct.setSalePrice(e.select(ItemSalePriceSelector).text());
                 saleProduct.setGender(Gender);
+                saleProduct.setProductType();
+                
+                if(saleProduct.getProductType().equals("Other")){
+                    System.out.println(saleProduct.getTitle() + " " + saleProduct.getProductType());
+                }
                 saleProducts.add(saleProduct);
             }
         } catch (IOException ex) {
@@ -146,7 +159,7 @@ public class Shops {
         WomensUrl = "https://www.asos.com/women/outlet/cat/?cid=27391&nlid=ww|outlet|shop%20by%20product&page=";
         ShopName = Names.ASOS;
         ItemSelector = "article._2oHs74P";
-        ItemNameSelector = "p";
+        ItemNameSelector = "._10-bVn6 p";
         ItemImageSelector = "img";
         ItemOriginalPriceSelector = "span._342BXW_";
         ItemSalePriceSelector = "span.JW3hTZk";

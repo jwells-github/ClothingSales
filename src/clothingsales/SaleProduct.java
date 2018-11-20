@@ -18,6 +18,7 @@ public class SaleProduct {
    private String productLink;
    private String shopName;
    private String gender;
+   private String productType;
 
     public String getTitle() {
         return title;
@@ -74,6 +75,56 @@ public class SaleProduct {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType() {
+        String[] titleWords = title.toLowerCase().split(" ");
+        Boolean matched = false;
+        for(String word : titleWords){
+          
+            switch(word){
+                case"t-shirt":
+                {
+                    productType = "T-Shirt";
+                    matched = true;
+                    break;
+                }
+                case"hoodie":{
+                    productType = "Hoodie";
+                    matched = true;
+                    break;
+                }
+                case"shirt":{
+                    productType = "Shirt";
+                    matched = true;
+                    break;
+                }
+                case "chino":
+                case "trouser":
+                case "trousers":
+                {
+                    productType = "Trousers";
+                    matched = true;
+                    break;
+                }
+                case"jeans":{
+                    productType = "Jeans";
+                    matched = true;
+                    break;
+                }
+            }
+            if(matched){
+                break;
+            }
+        }
+        if(!matched){
+            productType = "Other";
+        }
+       
     }
    
     

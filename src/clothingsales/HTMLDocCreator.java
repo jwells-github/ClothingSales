@@ -29,9 +29,8 @@ public class HTMLDocCreator {
         try {
             bw = new BufferedWriter(new FileWriter(file, false));
             linkStyleSheet();
-            
-            bw.append("\t"
-                    + "<ul>");
+            bw.newLine();
+            bw.append("<ul>");
             bw.newLine();
             bw.append("\t"
                     + "<li><a>Mens</a></li>");
@@ -40,6 +39,7 @@ public class HTMLDocCreator {
                     + "<li><a>Womens</a></li>");
             bw.newLine();
             bw.append("</ul>");
+            bw.newLine();
             bw.append("<div class=\"container\">");
             bw.newLine();
             for(SaleProduct product : saleProducts){
@@ -47,8 +47,12 @@ public class HTMLDocCreator {
                         + "<div class=\"item "+product.getGender()+"\">");
                 
                 bw.newLine();
-                bw.append("<span class=\"shop-name\">"+product.getShopName()+"</span>");
                 bw.append("\t"
+                        + "\t"
+                        + "<span class=\"shop-name\">"+product.getShopName()+"</span>");
+                bw.newLine();
+                bw.append("\t"
+                        + "\t"
                         + "<a href=\""+ product.getProductLink() +"\" target=\"_blank\">");
                 bw.newLine();
                 bw.append("\t"
@@ -56,7 +60,9 @@ public class HTMLDocCreator {
                         + "\t"
                         + "<img src=\""+product.getImageSrc() +"\">");
                 bw.newLine();
-                bw.append("</a>");
+                bw.append("\t"
+                        + "\t"
+                        + "</a>");
                 
                 bw.newLine();
                 bw.append("\t"

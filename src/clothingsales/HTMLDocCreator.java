@@ -33,10 +33,10 @@ public class HTMLDocCreator {
             bw.append("<ul>");
             bw.newLine();
             bw.append("\t"
-                    + "<li><a>Mens</a></li>");
+                    + "<li><a id=\"menbtn\" onClick=\"viewMen()\">Mens</a></li>");
             bw.newLine();
             bw.append("\t"
-                    + "<li><a>Womens</a></li>");
+                    + "<li><a id=\"womenbtn\" onClick=\"viewWomen()\">Womens</a></li>");
             bw.newLine();
             bw.append("</ul>");
             bw.newLine();

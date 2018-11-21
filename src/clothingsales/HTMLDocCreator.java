@@ -28,7 +28,8 @@ public class HTMLDocCreator {
         
         try {
             bw = new BufferedWriter(new FileWriter(file, false));
-            linkStyleSheet();
+            addHeadTag();
+            
             bw.newLine();
             bw.append("<ul>");
             bw.newLine();
@@ -91,7 +92,7 @@ public class HTMLDocCreator {
         }
     }
     
-    private void linkStyleSheet(){
+    private void addHeadTag(){
         if(bw != null){
             try {
                 bw.append("<head>");
@@ -99,7 +100,10 @@ public class HTMLDocCreator {
                 bw.append("\t"
                         + "<link rel=\"stylesheet\" type=\"text/css\" href=\"styles.css\">");
                 bw.newLine();
+                bw.append("\t"
+                        + "<script src=\"script.js\"></script>");
                 bw.append("</head>");
+                
             } catch (IOException ex) {
                 Logger.getLogger(HTMLDocCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
